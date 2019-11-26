@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-wordpress更新" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-自力更生" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/" class="article-date">
-  <time datetime="2019-11-26T15:29:01.562Z" itemprop="datePublished">2019-11-26</time>
+    <a href="/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.881Z" itemprop="datePublished">2019-11-27</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/">wordpress更新</a>
+      <a class="article-title" href="/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/">自力更生</a>
     </h1>
   
 
@@ -83,18 +83,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.<br>#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下</p>
-<h3 id="1-ssr"><a href="#1-ssr" class="headerlink" title="1.ssr"></a>1.ssr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ssrbackup/shadowsocksr</span><br><span class="line">sudo cp shadowsocksr/config.json /etc/shadowsocks.json</span><br><span class="line">sudo vim /etc/shadowsocks.json</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#ssr代理通过网络搜索获得，并验证可用</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##配置文件如下格式</span></span></span><br><span class="line">&#123;</span><br><span class="line">    "local_address": "127.0.0.1",</span><br><span class="line">    "local_port": 1080,</span><br><span class="line">    "enable": true,</span><br><span class="line">    "method": "aes-256-cfb",</span><br><span class="line">    "obfs": "plain",</span><br><span class="line">    "obfsparam": "",</span><br><span class="line">    "password": "bTuK5IJr9hzl",</span><br><span class="line">    "protocol": "origin",</span><br><span class="line">    "protocolparam": "",</span><br><span class="line">    "remarks_base64": "IzdFMUQvQVMzNDYyOiBUYWl3YW4",</span><br><span class="line">    "server": "*.*.*.*",</span><br><span class="line">    "server_port": 21971</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##启动代理</span></span></span><br><span class="line">sudo python shadowsocksr/shadowsocksr/local.py -c /etc/shadowsocks.json -d start</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### ssr代理资源比较多，但是无法在终端直接使用socks5代理,为此需要安装proxychains</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-proxychains"><a href="#2-proxychains" class="headerlink" title="2. proxychains"></a>2. proxychains</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rofl0r/proxychains-ng.git</span><br><span class="line">cd proxychains-ng</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##修改最后一行，启用ssr的sock5代理</span></span></span><br><span class="line">socks5  127.0.0.1 1080</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-wp-cl"><a href="#3-wp-cl" class="headerlink" title="3. wp-cl"></a>3. wp-cl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar</span><br><span class="line">chmod +x wp-cli.phar </span><br><span class="line">sudo cp wp-cli.phar /usr/bin/wp</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##创建缓存文件夹，修改缓存文件夹权限</span></span></span><br><span class="line">sudo mkdir -p /home/www/.wp-cli/cache/</span><br><span class="line">sudo chown -R www:www /home/www</span><br><span class="line">sudo chmod -R 777 /home/www/.wp-cli/</span><br><span class="line">sudo su</span><br><span class="line">export WEBPATH=/www/wwwroot/liuqh.phy.sustech.edu.cn</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##检查需要更新的插件</span></span></span><br><span class="line">sudo -u www -- wp plugin list --path=$WEBPATH</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##依次更新插件</span></span></span><br><span class="line">for i in all-in-one-wp-migration all-in-one-seo-pack http-headers;do proxychains4 sudo -u www -- wp plugin update $i --path=$WEBPATH;done</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##更新主程序和数据库</span></span></span><br><span class="line">proxychains4 sudo -u www -- wp core update  --path=$WEBPATH</span><br><span class="line">proxychains4 sudo -u www -- wp core update-db  --path=$WEBPATH</span><br></pre></td></tr></table></figure>
-
+        <p>天行健，君子以自强不息</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://tangh.cn/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/" data-id="ck3g1964u0001u8fu9coth71s" class="article-share-link">Share</a>
+      <a data-url="https://tangh.cn/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/" data-id="ck3g23slq000crifug25q51ey" class="article-share-link">Share</a>
       
       
     </footer>
@@ -104,10 +98,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-优化行为方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/26/hello-world/" class="article-date">
-  <time datetime="2019-11-26T14:41:36.531Z" itemprop="datePublished">2019-11-26</time>
+    <a href="/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.869Z" itemprop="datePublished">2019-11-27</time>
 </a>
     
   </div>
@@ -118,7 +112,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/26/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/">优化行为方式</a>
     </h1>
   
 
@@ -126,24 +120,361 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>做人应当把主要精力和时间放到自己及与自己相关的事情上，<br>要对自己负责，经营自己的生活，感情，健康，事业，<br>承担错误的后果，也享受成就的业绩，<br>也要有一种人人当为自己的一言一行，所做所为负责的心态，<br>要忌讳和避免的是过分关心别人的事情，<br>和要求别人关心自己的事情的心态，<br>要分辨清楚这两种事情，<br>审视和判断自己，而不是随意评论和纠缠他人的所做所为，<br>对他人和外界的环境一样只能观察，总结规律，并给予相应的回应。<br>而不是自以为是的认为外界当按照个人的想法运转，那是懒惰的行为方式，<br>对自己也要观察和审视，并加以控制和协调，优化自己。<br>有准备过好孤独的基础，才能有实力与人沟通和合作，<br>与自己相伴，是其他的基础。在外不惹事，惹事了也不怕事。<br>要纠正十多年来潜移默化的，过分依赖外界的行为方式，<br>学习更好的爱，珍惜，<br>经营自己这个渺小而又对自己无可替代的生命。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://tangh.cn/2019/11/26/hello-world/" data-id="ck3g1964e0000u8fufrcq2rhs" class="article-share-link">Share</a>
+      <a data-url="https://tangh.cn/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/" data-id="ck3g23sle0009rifu5nsn6686" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-声子" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/%E5%A3%B0%E5%AD%90/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.865Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/%E5%A3%B0%E5%AD%90/">声子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>晶格动力学<br>用经典理论力学方法讨论完整晶体中原子（离子）绕平衡位置的振动——晶格振动。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/%E5%A3%B0%E5%AD%90/" data-id="ck3g23slk000brifubt8v2s9y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-xelatex中文字体" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.861Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">xelatex中文字体</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>opensuse xelatex 中文字体问题</p>
+<p>以下文字为实际操作记录，<br>文字大量引用自<br><a href="http://www.bfcat.com/index.php/2013/10/ubuntu-12-04-kile-texlive2013cjk/" target="_blank" rel="noopener">http://www.bfcat.com/index.php/2013/10/ubuntu-12-04-kile-texlive2013cjk/</a><br>以及<br><a href="https://huxuan.org/2012/07/14/chinese-font-problem-of-ctex-in-texlive-under-linux/" target="_blank" rel="noopener">https://huxuan.org/2012/07/14/chinese-font-problem-of-ctex-in-texlive-under-linux/</a><br>##</p>
+<p>新建 /usr/share/fonts/winfonts 目录并且将需要的中文字体拷入<br>进入文件夹</p>
+<p>cd /usr/share/fonts/winfonts</p>
+<p>改变权限</p>
+<p>sudo chmod 744 *</p>
+<p>生成核心字体信息</p>
+<p>sudo mkfontscale<br>sudo mkfontdir<br>sudo fc-cache -f -v</p>
+<p>此时用命令</p>
+<p>sudo fc-list :lang=zh-cn</p>
+<p>查看中文字体信息。</p>
+<p>记下楷体和仿宋对应的名称，即显示信息中第一个英文<br>比如有的的系统中楷体是 KaiTi，仿宋是 FangSong<br>此处会因为安装的字体版本不同而有所差异</p>
+<p>接下来只要将对应的字体修改即可，即<br>把[SIMKAI.TTF]修改为KaiTi<br>把[SIMFANG.TTF]修改为FangSong<br>需要注意不止一处</p>
+<p>vim下的替换命令</p>
+<p>:%s/[SIMKAI.TTF]/KaiTi/g<br>:%s/[SIMFANG.TTF]/FangSong/g</p>
+<p>另一个解决方案是使用Adobe的字体，调用ctex包时增加adobefonts参数</p>
+<p>以下引用自 <a href="http://bbs.ctex.org/forum.php?mod=viewthread&amp;tid=58263&amp;page=1#pid383083" target="_blank" rel="noopener">http://bbs.ctex.org/forum.php?mod=viewthread&amp;tid=58263&amp;page=1#pid383083</a><br>原因是这样的（其实懒人就不必看了）：</p>
+<p>在字体定义文件 ctex-xecjk-winfonts.def 中，楷体和仿宋不是使用字体全名，而是使用字体文件名表示的。如楷书是：<br>\setCJKfamilyfont{zhkai}{[simkai.ttf]}<br>之所以这样是因为在 Windows XP 中楷书和仿宋是 GB_2313 字符集的，只有 6000 多个汉字，楷体字体全名是 KaiTi_GB2312；而在 Windows Vista 以后和版本则是 GBK 大字库的，有 20000 多个汉字，字体全名是 KaiTi。为了避免为微软的不同操作系统版本写不同的配置文件（这样更麻烦，而且 Windows 用户是大多数），就把它直接用没有变化过的字体文件名表示。</p>
+<p>这个修改就是我做的。当然对于 Linux 用户可能有一些副作用。因为上面的字体名使用的是小写字母，而通常大家拷贝的字体是大写字母（这算是我的疏忽）。你知道 Windows 不区分文件名大小写，但 Linux 区分，所以当然 Linux 找不到 simsun.ttf 这个字体了。</p>
+<p>我实在不建议 Linux 用户修改 ctex-xecjk-winfonts.def 文件。你可以使用 Windows 字体加上默认选项，但注意你安装的中文字体文件名要匹配。还有一个办法是写自己的配置文件，ctex 宏包有自己的 cfg 文件，在 …/texmf-dist/tex/latex/ctex/cfg/ctex.cfg 中，你可以在这个文件里面添加你自己的 local settings。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" data-id="ck3g23sl90007rifu8qtf3uir" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-不要做感动自己的事情" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.861Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/">不要做感动自己的事情</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>人生的一个大忌讳 便是做感动自己或者‘感动’他人的事情。<br>越是有救赎的路径，便会越是肆无忌惮，不计后果，<br>于是感动自己，感动菩萨，感动上帝，感动真主，<br>变成为毁灭和助纣为虐的推进器<br>花有重开日，人无再少年，<br>做好该做的事情，不有奢求，也不用力过猛<br>凡是清楚成本代价，以及后果与收益，<br>不糊弄自己，也不愚弄他人，<br>自以为是的，当别人是傻子<br>为人当如此</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/" data-id="ck3g23slc0008rifuhto7eo73" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rich" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/rich/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.857Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/rich/">rich</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>‘Spend your money on the things money can buy. Spend your time on the things money can’t buy.’ - Haruki MurakamiGood advice for all wealth levels.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/rich/" data-id="ck3g23sko0006rifua7548vjr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-remmina无法通过域名登陆" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.853Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/">remmina无法通过域名登陆</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>表现<br>Remmina 提示消息： Unable to connect rdp server</p>
+<p>解决方法<br>删除   ~/.freerdp/known_hosts 文件，即：</p>
+<p>rm ~/.freerdp/known_hosts</p>
+<p>原因<br>可能是域名对应的机器变了，所以要把缓存的密钥删除掉</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/" data-id="ck3g23skl0005rifucvh4gyf8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-opsnsuse kernel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/opsnsuse%20kernel/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.849Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/opsnsuse%20kernel/">solve [FAILED] Failed to start Load Kernel Modules</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装opensuse13-2-系统更新后，开机引导内核时候每次都出现"><a href="#安装opensuse13-2-系统更新后，开机引导内核时候每次都出现" class="headerlink" title="安装opensuse13.2 系统更新后，开机引导内核时候每次都出现"></a>安装opensuse13.2 系统更新后，开机引导内核时候每次都出现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ [FAILED] Failed to start Load Kernel Modules</span><br><span class="line">See <span class="string">"systemctl status systemd-modules-load.service"</span> <span class="keyword">for</span> details.</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>虽然不影响使用，但是也看着不爽，今天终于没有拖延了，解决了这个问题，记录如下<br>第一步:查</p>
+<p>使用如上关键词依次在 baidu bing google 上查询了一遍<br>这个问题在baidu上只能找到贴吧上的一个帖子但是没有给出解决方案，大部分都是讲关于虚拟机的问题，<br>在bing上找到了一个有用的线索，但是还是没有看明白，但google 上给出了大量的中英文信息。<br>主要参考了 这个帖子<br><a href="https://bbs.archlinux.org/viewtopic.php?id=187529" target="_blank" rel="noopener">https://bbs.archlinux.org/viewtopic.php?id=187529</a><br>里面两个人对话 讲到分别在 /etc/modules-load.d/ 和 /usr/lib/modules-load.d 文件夹中查看有没有文件<br>并解决了问题，我就甩开膀子开干了<br>第二步：试</p>
+<p>我打开上述两个文件夹，第一个文件夹也是空的，但是在第二个文件夹里找到了两个文件。<br>将这两个文件 复制到主文件夹中新建的临时文件目录，以免删除错了来恢复<br>这两个文件分别是 bbswitch.conf sg.conf<br>里面文件内容如下 ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bbswitch.conf</span><br><span class="line"></span><br><span class="line">bbswitch</span><br><span class="line"></span><br><span class="line">sg.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load sg module at boot time</span></span><br><span class="line">sg</span><br></pre></td></tr></table></figure>
+<p>然后 我就用sudo rm s* b* 删除了这两个文件了<br>接下来 参考了另一篇博文<br>chen.junchang.blog.163.com/blog/static/6344519201503135322287/<br>使用了 <code>sudo mkinitrd</code> 重新生成启动映像<br>生成过程中产生了一堆堆引导modules的错误，不知道是不是没有插入软件源U盘的原因。<br>然后重启<br>第三步：查</p>
+<p>重启后心惊胆跳地等待，没有报错，谢天谢地，<br>我等学渣基础不牢固，做事情总是自己对自己都不放心的</p>
+<p>最后，记录此文以给自己和读者参考</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/opsnsuse%20kernel/" data-id="ck3g23skc0003rifudzdn8414" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-one" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/one/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.841Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/one/">one</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>提提，爱自己，需要的是一种信念、或者说是信仰。无论你身处何地，失恋也好，失意也罢，都要善待自己，<br>维护好自己的身心，坚强的相信自己。那些低谷，只是一季轮回，花自会有再次娇艳绽放的时候。</p>
+<p>夏屿，燃烧吧，腺嘌呤核苷三磷酸！<br>如果在不相熟的人面前絮絮叨叨自己的个人苦恼和问题，是很失礼的。</p>
+<p>不知道怎么讲话的本质是对自己的不自信，害怕说错话，<br>然后你越揣度他人的想法，越在意人家的眼光，就越拘谨。<br>你要别人认可你，首先是要自己认可自己。害羞和内向绝非缺点！</p>
+<p>你至少应该知道几乎所有的游戏都有easy mode和hard mode，hard mode我们玩不来，<br>那我们可以先玩easy mode练练手啊！交际的easy mode就是和好相处的人交往，说话。<br>就算你现在交际能力不强，但至少你看得出来哪些人是好相处的。去找这些人说话。<br>你应该还是学生吧，你可以先从问他们作业开始啊！反正有事没事，就和这些人说说话。<br>然后，最重要的是，记下和这些人说话时的感觉，想想他们说话时吸引人的点在哪里，<br>自己和他们差在什么地方（你要在一个人的时候静静的想这些，边讲边想你就会不知道要讲什么了）。<br>记住，自己得来的经验才能帮助你，卡耐基，李开复，看看过就好了。</p>
+<p>不要轻易评论他人，不要揣度他人的想法，不要受他人影响，凡事尽力而为。</p>
+<p>Wang Adaaa，J.D. candidate. Lifetime adventurer.</p>
+<p>去年特低落的时候，一个朋友告诉我要爱自己。我问怎么就叫爱自己，她说怎么对你在乎的人，就怎么对你自己。</p>
+<p>太忙了，自己想省略午餐时候，想象要是自己在乎的人没空吃饭，我肯定不准，<br>哪怕不能自己下厨，至少也要买有营养的外卖送去。然后把自己想象成那个人，<br>给自己订份外卖。<br>拖延症犯了，坐在书桌前磨蹭半天都看不进书，自暴自弃。<br>想象读高三表弟如果在磨洋工，我一定会温柔的鼓励他，<br>再坚持一会儿，把任务完成。然后同样温柔的鼓励一下自己。<br>看到特别喜欢的东西舍不得买，想象如果这是我爸爸妈妈或者喜欢的人心仪的东西，<br>我一定会毫不犹豫买下。然后同样不犹豫的买下送给自己。<br>离不开错的人，太软弱，反反复复很虐心。想象如果是我最好的朋友深陷泥沼，<br>我一定要做个恶人，无情的帮她了断。然后就无情的帮自己了断。</p>
+<p>爱自己？把自己当别人来对待吧。其实我们大多数人都善良又无私，对别人比对自己好。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/one/" data-id="ck3g23sk50002rifucgaj5xfa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-matlab2012a on opensuse 13.2 " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.833Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/">matlab2012a on opensuse 13.2 </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 opensuse 中安装 matlab时候，<br>sudo ./install 后出现报错</p>
+<p>Error: Installation cannot proceed. You may either:</p>
+<ol>
+<li>Set an X11 display, and restart the install process</li>
+<li>Use the silent install feature by specifying the -mode silent option</li>
+</ol>
+<p>解决的方法是 切换到 root用户下，启动图形界面,继续安装就没有问题了</p>
+<p>sudo su<br> startx<br>./install</p>
+<p>其他的linux版本与此类似</p>
+<p>安装完毕后<br>设置环境变量</p>
+<p>sudo vi /etc/profile</p>
+<p>在文件末尾添加</p>
+<p>export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_71</p>
+<p>保存并推出，然后使用下面的命令是设置生效</p>
+<p>source /etc/profile</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/" data-id="ck3g23sjz0001rifuac0n05lx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -154,6 +485,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -171,7 +507,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li></ul>
     </div>
   </div>
 
@@ -184,11 +520,23 @@
       <ul>
         
           <li>
-            <a href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/">wordpress更新</a>
+            <a href="/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/">自力更生</a>
           </li>
         
           <li>
-            <a href="/2019/11/26/hello-world/">Hello World</a>
+            <a href="/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/">优化行为方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/%E5%A3%B0%E5%AD%90/">声子</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">xelatex中文字体</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/">不要做感动自己的事情</a>
           </li>
         
       </ul>
