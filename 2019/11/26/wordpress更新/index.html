@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>wordpress更新 | one line</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下 1.ssr12345678910111213141516171819202122git clone https:&#x2F;&#x2F;github.com&#x2F;ssrbackup&#x2F;shadowsocksrsudo cp s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wordpress更新">
+<meta property="og:url" content="https:&#x2F;&#x2F;tangh.cn&#x2F;2019&#x2F;11&#x2F;26&#x2F;wordpress%E6%9B%B4%E6%96%B0&#x2F;index.html">
+<meta property="og:site_name" content="one line">
+<meta property="og:description" content="#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下 1.ssr12345678910111213141516171819202122git clone https:&#x2F;&#x2F;github.com&#x2F;ssrbackup&#x2F;shadowsocksrsudo cp s">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-26T14:10:17.000Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="one line" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">one line</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tangh.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-wordpress更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/" class="article-date">
+  <time datetime="2019-11-26T15:29:01.562Z" itemprop="datePublished">2019-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      wordpress更新
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.<br>#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下</p>
+<h3 id="1-ssr"><a href="#1-ssr" class="headerlink" title="1.ssr"></a>1.ssr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ssrbackup/shadowsocksr</span><br><span class="line">sudo cp shadowsocksr/config.json /etc/shadowsocks.json</span><br><span class="line">sudo vim /etc/shadowsocks.json</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#ssr代理通过网络搜索获得，并验证可用</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##配置文件如下格式</span></span></span><br><span class="line">&#123;</span><br><span class="line">    "local_address": "127.0.0.1",</span><br><span class="line">    "local_port": 1080,</span><br><span class="line">    "enable": true,</span><br><span class="line">    "method": "aes-256-cfb",</span><br><span class="line">    "obfs": "plain",</span><br><span class="line">    "obfsparam": "",</span><br><span class="line">    "password": "bTuK5IJr9hzl",</span><br><span class="line">    "protocol": "origin",</span><br><span class="line">    "protocolparam": "",</span><br><span class="line">    "remarks_base64": "IzdFMUQvQVMzNDYyOiBUYWl3YW4",</span><br><span class="line">    "server": "*.*.*.*",</span><br><span class="line">    "server_port": 21971</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##启动代理</span></span></span><br><span class="line">sudo python shadowsocksr/shadowsocksr/local.py -c /etc/shadowsocks.json -d start</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### ssr代理资源比较多，但是无法在终端直接使用socks5代理,为此需要安装proxychains</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-proxychains"><a href="#2-proxychains" class="headerlink" title="2. proxychains"></a>2. proxychains</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rofl0r/proxychains-ng.git</span><br><span class="line">cd proxychains-ng</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##修改最后一行，启用ssr的sock5代理</span></span></span><br><span class="line">socks5  127.0.0.1 1080</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-wp-cl"><a href="#3-wp-cl" class="headerlink" title="3. wp-cl"></a>3. wp-cl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar</span><br><span class="line">chmod +x wp-cli.phar </span><br><span class="line">sudo cp wp-cli.phar /usr/bin/wp</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##创建缓存文件夹，修改缓存文件夹权限</span></span></span><br><span class="line">sudo mkdir -p /home/www/.wp-cli/cache/</span><br><span class="line">sudo chown -R www:www /home/www</span><br><span class="line">sudo chmod -R 777 /home/www/.wp-cli/</span><br><span class="line">sudo su</span><br><span class="line">export WEBPATH=/www/wwwroot/liuqh.phy.sustech.edu.cn</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##检查需要更新的插件</span></span></span><br><span class="line">sudo -u www -- wp plugin list --path=$WEBPATH</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##依次更新插件</span></span></span><br><span class="line">for i in all-in-one-wp-migration all-in-one-seo-pack http-headers;do proxychains4 sudo -u www -- wp plugin update $i --path=$WEBPATH;done</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##更新主程序和数据库</span></span></span><br><span class="line">proxychains4 sudo -u www -- wp core update  --path=$WEBPATH</span><br><span class="line">proxychains4 sudo -u www -- wp core update-db  --path=$WEBPATH</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/" data-id="ck3g1964u0001u8fu9coth71s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/">wordpress更新</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/26/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Tang Hong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
