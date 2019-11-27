@@ -5,16 +5,13 @@
   
 
   
-  <title>wordpress更新 | one line</title>
+  <title>one line</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下 1.ssr12345678910111213141516171819202122git clone https:&#x2F;&#x2F;github.com&#x2F;ssrbackup&#x2F;shadowsocksrsudo cp s">
-<meta property="og:type" content="article">
-<meta property="og:title" content="wordpress更新">
-<meta property="og:url" content="https:&#x2F;&#x2F;tangh.cn&#x2F;2019&#x2F;11&#x2F;26&#x2F;wordpress%E6%9B%B4%E6%96%B0&#x2F;index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="one line">
+<meta property="og:url" content="https:&#x2F;&#x2F;tangh.cn&#x2F;page&#x2F;4&#x2F;index.html">
 <meta property="og:site_name" content="one line">
-<meta property="og:description" content="#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下 1.ssr12345678910111213141516171819202122git clone https:&#x2F;&#x2F;github.com&#x2F;ssrbackup&#x2F;shadowsocksrsudo cp s">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T14:10:17.000Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="one line" type="application/atom+xml">
@@ -62,7 +59,109 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-wordpress更新" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-matlab2012a on opensuse 13.2 " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.833Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/">matlab2012a on opensuse 13.2 </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在 opensuse 中安装 matlab时候，<br>sudo ./install 后出现报错</p>
+<p>Error: Installation cannot proceed. You may either:</p>
+<ol>
+<li>Set an X11 display, and restart the install process</li>
+<li>Use the silent install feature by specifying the -mode silent option</li>
+</ol>
+<p>解决的方法是 切换到 root用户下，启动图形界面,继续安装就没有问题了</p>
+<p>sudo su<br> startx<br>./install</p>
+<p>其他的linux版本与此类似</p>
+<p>安装完毕后<br>设置环境变量</p>
+<p>sudo vi /etc/profile</p>
+<p>在文件末尾添加</p>
+<p>export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_71</p>
+<p>保存并推出，然后使用下面的命令是设置生效</p>
+<p>source /etc/profile</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/" data-id="ck3gwr8ga000246fua2jp8ij5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world(副本)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.825Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/" data-id="ck3gwr8fr000046fu6b0v5udg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-wordpress更新" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/" class="article-date">
   <time datetime="2019-11-26T15:29:01.562Z" itemprop="datePublished">2019-11-26</time>
@@ -75,8 +174,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      wordpress更新
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/">wordpress更新</a>
     </h1>
   
 
@@ -101,28 +200,16 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/11/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
