@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>自力更生</title>
-      <link href="/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/"/>
-      <url>/2019/11/27/%E8%87%AA%E5%8A%9B%E6%9B%B4%E7%94%9F/</url>
+      <title>wordpress更新</title>
+      <link href="/2019/11/27/wordpress%E6%9B%B4%E6%96%B0/"/>
+      <url>/2019/11/27/wordpress%E6%9B%B4%E6%96%B0/</url>
       
-        <content type="html"><![CDATA[<p>天行健，君子以自强不息</p>]]></content>
+        <content type="html"><![CDATA[<p>title: 通过代理和命令行更新WordPress<br>date: 2019-11-27 15:10:50</p><p>#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.<br>#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下</p><h3 id="1-ssr"><a href="#1-ssr" class="headerlink" title="1.ssr"></a>1.ssr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ssrbackup/shadowsocksr</span><br><span class="line">sudo cp shadowsocksr/config.json /etc/shadowsocks.json</span><br><span class="line">sudo vim /etc/shadowsocks.json</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#ssr代理通过网络搜索获得，并验证可用</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##配置文件如下格式</span></span></span><br><span class="line">&#123;</span><br><span class="line">    "local_address": "127.0.0.1",</span><br><span class="line">    "local_port": 1080,</span><br><span class="line">    "enable": true,</span><br><span class="line">    "method": "aes-256-cfb",</span><br><span class="line">    "obfs": "plain",</span><br><span class="line">    "obfsparam": "",</span><br><span class="line">    "password": "bTuK5IJr9hzl",</span><br><span class="line">    "protocol": "origin",</span><br><span class="line">    "protocolparam": "",</span><br><span class="line">    "remarks_base64": "IzdFMUQvQVMzNDYyOiBUYWl3YW4",</span><br><span class="line">    "server": "*.*.*.*",</span><br><span class="line">    "server_port": 21971</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##启动代理</span></span></span><br><span class="line">sudo python shadowsocksr/shadowsocksr/local.py -c /etc/shadowsocks.json -d start</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### ssr代理资源比较多，但是无法在终端直接使用socks5代理,为此需要安装proxychains</span></span></span><br></pre></td></tr></table></figure><h3 id="2-proxychains"><a href="#2-proxychains" class="headerlink" title="2. proxychains"></a>2. proxychains</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rofl0r/proxychains-ng.git</span><br><span class="line">cd proxychains-ng</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##修改最后一行，启用ssr的sock5代理</span></span></span><br><span class="line">socks5  127.0.0.1 1080</span><br></pre></td></tr></table></figure><h3 id="3-wp-cl"><a href="#3-wp-cl" class="headerlink" title="3. wp-cl"></a>3. wp-cl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar</span><br><span class="line">chmod +x wp-cli.phar </span><br><span class="line">sudo cp wp-cli.phar /usr/bin/wp</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##创建缓存文件夹，修改缓存文件夹权限</span></span></span><br><span class="line">sudo mkdir -p /home/www/.wp-cli/cache/</span><br><span class="line">sudo chown -R www:www /home/www</span><br><span class="line">sudo chmod -R 777 /home/www/.wp-cli/</span><br><span class="line">sudo su</span><br><span class="line">export WEBPATH=/www/wwwroot/liuqh.phy.sustech.edu.cn</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##检查需要更新的插件</span></span></span><br><span class="line">sudo -u www -- wp plugin list --path=$WEBPATH</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##依次更新插件</span></span></span><br><span class="line">for i in all-in-one-wp-migration all-in-one-seo-pack http-headers;do proxychains4 sudo -u www -- wp plugin update $i --path=$WEBPATH;done</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##更新主程序和数据库</span></span></span><br><span class="line">proxychains4 sudo -u www -- wp core update  --path=$WEBPATH</span><br><span class="line">proxychains4 sudo -u www -- wp core update-db  --path=$WEBPATH</span><br></pre></td></tr></table></figure>]]></content>
       
       
       
@@ -17,11 +17,11 @@
     
     
     <entry>
-      <title>优化行为方式</title>
-      <link href="/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/"/>
-      <url>/2019/11/27/%E4%BC%98%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%96%B9%E5%BC%8F/</url>
+      <title>matlab2012a on opensuse 13.2 </title>
+      <link href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/"/>
+      <url>/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/</url>
       
-        <content type="html"><![CDATA[<p>做人应当把主要精力和时间放到自己及与自己相关的事情上，<br>要对自己负责，经营自己的生活，感情，健康，事业，<br>承担错误的后果，也享受成就的业绩，<br>也要有一种人人当为自己的一言一行，所做所为负责的心态，<br>要忌讳和避免的是过分关心别人的事情，<br>和要求别人关心自己的事情的心态，<br>要分辨清楚这两种事情，<br>审视和判断自己，而不是随意评论和纠缠他人的所做所为，<br>对他人和外界的环境一样只能观察，总结规律，并给予相应的回应。<br>而不是自以为是的认为外界当按照个人的想法运转，那是懒惰的行为方式，<br>对自己也要观察和审视，并加以控制和协调，优化自己。<br>有准备过好孤独的基础，才能有实力与人沟通和合作，<br>与自己相伴，是其他的基础。在外不惹事，惹事了也不怕事。<br>要纠正十多年来潜移默化的，过分依赖外界的行为方式，<br>学习更好的爱，珍惜，<br>经营自己这个渺小而又对自己无可替代的生命。</p>]]></content>
+        <content type="html"><![CDATA[<p>title: 解决matlab安装报错<br>date: 2016-02-06 15:10:50</p><p>在 opensuse 中安装 matlab时候，<br>sudo ./install 后出现报错</p><p>Error: Installation cannot proceed. You may either:</p><ol><li>Set an X11 display, and restart the install process</li><li>Use the silent install feature by specifying the -mode silent option</li></ol><p>解决的方法是 切换到 root用户下，启动图形界面,继续安装就没有问题了</p><p>sudo su<br> startx<br>./install</p><p>其他的linux版本与此类似</p><p>安装完毕后<br>设置环境变量</p><p>sudo vi /etc/profile</p><p>在文件末尾添加</p><p>export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_71</p><p>保存并推出，然后使用下面的命令是设置生效</p><p>source /etc/profile</p>]]></content>
       
       
       
@@ -56,32 +56,6 @@
     
     
     <entry>
-      <title>不要做感动自己的事情</title>
-      <link href="/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/"/>
-      <url>/2019/11/27/%E4%B8%8D%E8%A6%81%E5%81%9A%E6%84%9F%E5%8A%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%8B%E6%83%85/</url>
-      
-        <content type="html"><![CDATA[<p>人生的一个大忌讳 便是做感动自己或者‘感动’他人的事情。<br>越是有救赎的路径，便会越是肆无忌惮，不计后果，<br>于是感动自己，感动菩萨，感动上帝，感动真主，<br>变成为毁灭和助纣为虐的推进器<br>花有重开日，人无再少年，<br>做好该做的事情，不有奢求，也不用力过猛<br>凡是清楚成本代价，以及后果与收益，<br>不糊弄自己，也不愚弄他人，<br>自以为是的，当别人是傻子<br>为人当如此</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>rich</title>
-      <link href="/2019/11/27/rich/"/>
-      <url>/2019/11/27/rich/</url>
-      
-        <content type="html"><![CDATA[<p>‘Spend your money on the things money can buy. Spend your time on the things money can’t buy.’ - Haruki MurakamiGood advice for all wealth levels.</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>remmina无法通过域名登陆</title>
       <link href="/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/"/>
       <url>/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/</url>
@@ -100,97 +74,6 @@
       <url>/2019/11/27/opsnsuse%20kernel/</url>
       
         <content type="html"><![CDATA[<h2 id="安装opensuse13-2-系统更新后，开机引导内核时候每次都出现"><a href="#安装opensuse13-2-系统更新后，开机引导内核时候每次都出现" class="headerlink" title="安装opensuse13.2 系统更新后，开机引导内核时候每次都出现"></a>安装opensuse13.2 系统更新后，开机引导内核时候每次都出现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ [FAILED] Failed to start Load Kernel Modules</span><br><span class="line">See <span class="string">"systemctl status systemd-modules-load.service"</span> <span class="keyword">for</span> details.</span><br><span class="line">......</span><br></pre></td></tr></table></figure><p>虽然不影响使用，但是也看着不爽，今天终于没有拖延了，解决了这个问题，记录如下<br>第一步:查</p><p>使用如上关键词依次在 baidu bing google 上查询了一遍<br>这个问题在baidu上只能找到贴吧上的一个帖子但是没有给出解决方案，大部分都是讲关于虚拟机的问题，<br>在bing上找到了一个有用的线索，但是还是没有看明白，但google 上给出了大量的中英文信息。<br>主要参考了 这个帖子<br><a href="https://bbs.archlinux.org/viewtopic.php?id=187529" target="_blank" rel="noopener">https://bbs.archlinux.org/viewtopic.php?id=187529</a><br>里面两个人对话 讲到分别在 /etc/modules-load.d/ 和 /usr/lib/modules-load.d 文件夹中查看有没有文件<br>并解决了问题，我就甩开膀子开干了<br>第二步：试</p><p>我打开上述两个文件夹，第一个文件夹也是空的，但是在第二个文件夹里找到了两个文件。<br>将这两个文件 复制到主文件夹中新建的临时文件目录，以免删除错了来恢复<br>这两个文件分别是 bbswitch.conf sg.conf<br>里面文件内容如下 ：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bbswitch.conf</span><br><span class="line"></span><br><span class="line">bbswitch</span><br><span class="line"></span><br><span class="line">sg.conf</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load sg module at boot time</span></span><br><span class="line">sg</span><br></pre></td></tr></table></figure><p>然后 我就用sudo rm s* b* 删除了这两个文件了<br>接下来 参考了另一篇博文<br>chen.junchang.blog.163.com/blog/static/6344519201503135322287/<br>使用了 <code>sudo mkinitrd</code> 重新生成启动映像<br>生成过程中产生了一堆堆引导modules的错误，不知道是不是没有插入软件源U盘的原因。<br>然后重启<br>第三步：查</p><p>重启后心惊胆跳地等待，没有报错，谢天谢地，<br>我等学渣基础不牢固，做事情总是自己对自己都不放心的</p><p>最后，记录此文以给自己和读者参考</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>one</title>
-      <link href="/2019/11/27/one/"/>
-      <url>/2019/11/27/one/</url>
-      
-        <content type="html"><![CDATA[<p>提提，爱自己，需要的是一种信念、或者说是信仰。无论你身处何地，失恋也好，失意也罢，都要善待自己，<br>维护好自己的身心，坚强的相信自己。那些低谷，只是一季轮回，花自会有再次娇艳绽放的时候。</p><p>夏屿，燃烧吧，腺嘌呤核苷三磷酸！<br>如果在不相熟的人面前絮絮叨叨自己的个人苦恼和问题，是很失礼的。</p><p>不知道怎么讲话的本质是对自己的不自信，害怕说错话，<br>然后你越揣度他人的想法，越在意人家的眼光，就越拘谨。<br>你要别人认可你，首先是要自己认可自己。害羞和内向绝非缺点！</p><p>你至少应该知道几乎所有的游戏都有easy mode和hard mode，hard mode我们玩不来，<br>那我们可以先玩easy mode练练手啊！交际的easy mode就是和好相处的人交往，说话。<br>就算你现在交际能力不强，但至少你看得出来哪些人是好相处的。去找这些人说话。<br>你应该还是学生吧，你可以先从问他们作业开始啊！反正有事没事，就和这些人说说话。<br>然后，最重要的是，记下和这些人说话时的感觉，想想他们说话时吸引人的点在哪里，<br>自己和他们差在什么地方（你要在一个人的时候静静的想这些，边讲边想你就会不知道要讲什么了）。<br>记住，自己得来的经验才能帮助你，卡耐基，李开复，看看过就好了。</p><p>不要轻易评论他人，不要揣度他人的想法，不要受他人影响，凡事尽力而为。</p><p>Wang Adaaa，J.D. candidate. Lifetime adventurer.</p><p>去年特低落的时候，一个朋友告诉我要爱自己。我问怎么就叫爱自己，她说怎么对你在乎的人，就怎么对你自己。</p><p>太忙了，自己想省略午餐时候，想象要是自己在乎的人没空吃饭，我肯定不准，<br>哪怕不能自己下厨，至少也要买有营养的外卖送去。然后把自己想象成那个人，<br>给自己订份外卖。<br>拖延症犯了，坐在书桌前磨蹭半天都看不进书，自暴自弃。<br>想象读高三表弟如果在磨洋工，我一定会温柔的鼓励他，<br>再坚持一会儿，把任务完成。然后同样温柔的鼓励一下自己。<br>看到特别喜欢的东西舍不得买，想象如果这是我爸爸妈妈或者喜欢的人心仪的东西，<br>我一定会毫不犹豫买下。然后同样不犹豫的买下送给自己。<br>离不开错的人，太软弱，反反复复很虐心。想象如果是我最好的朋友深陷泥沼，<br>我一定要做个恶人，无情的帮她了断。然后就无情的帮自己了断。</p><p>爱自己？把自己当别人来对待吧。其实我们大多数人都善良又无私，对别人比对自己好。 </p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>matlab2012a on opensuse 13.2 </title>
-      <link href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/"/>
-      <url>/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/</url>
-      
-        <content type="html"><![CDATA[<p>在 opensuse 中安装 matlab时候，<br>sudo ./install 后出现报错</p><p>Error: Installation cannot proceed. You may either:</p><ol><li>Set an X11 display, and restart the install process</li><li>Use the silent install feature by specifying the -mode silent option</li></ol><p>解决的方法是 切换到 root用户下，启动图形界面,继续安装就没有问题了</p><p>sudo su<br> startx<br>./install</p><p>其他的linux版本与此类似</p><p>安装完毕后<br>设置环境变量</p><p>sudo vi /etc/profile</p><p>在文件末尾添加</p><p>export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_71</p><p>保存并推出，然后使用下面的命令是设置生效</p><p>source /etc/profile</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/"/>
-      <url>/2019/11/27/hello-world(%E5%89%AF%E6%9C%AC)/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>wordpress更新</title>
-      <link href="/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/"/>
-      <url>/2019/11/26/wordpress%E6%9B%B4%E6%96%B0/</url>
-      
-        <content type="html"><![CDATA[<p>#由于WordPress官方网站wordpress.org的CDN服务器屏蔽了大陆ip,导致后#台WordPress和程序无法更新.<br>#为此我通过网络代理和服务器命令更新了插件和主程序，命令流记录如下</p><h3 id="1-ssr"><a href="#1-ssr" class="headerlink" title="1.ssr"></a>1.ssr</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ssrbackup/shadowsocksr</span><br><span class="line">sudo cp shadowsocksr/config.json /etc/shadowsocks.json</span><br><span class="line">sudo vim /etc/shadowsocks.json</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#ssr代理通过网络搜索获得，并验证可用</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##配置文件如下格式</span></span></span><br><span class="line">&#123;</span><br><span class="line">    "local_address": "127.0.0.1",</span><br><span class="line">    "local_port": 1080,</span><br><span class="line">    "enable": true,</span><br><span class="line">    "method": "aes-256-cfb",</span><br><span class="line">    "obfs": "plain",</span><br><span class="line">    "obfsparam": "",</span><br><span class="line">    "password": "bTuK5IJr9hzl",</span><br><span class="line">    "protocol": "origin",</span><br><span class="line">    "protocolparam": "",</span><br><span class="line">    "remarks_base64": "IzdFMUQvQVMzNDYyOiBUYWl3YW4",</span><br><span class="line">    "server": "*.*.*.*",</span><br><span class="line">    "server_port": 21971</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##启动代理</span></span></span><br><span class="line">sudo python shadowsocksr/shadowsocksr/local.py -c /etc/shadowsocks.json -d start</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### ssr代理资源比较多，但是无法在终端直接使用socks5代理,为此需要安装proxychains</span></span></span><br></pre></td></tr></table></figure><h3 id="2-proxychains"><a href="#2-proxychains" class="headerlink" title="2. proxychains"></a>2. proxychains</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rofl0r/proxychains-ng.git</span><br><span class="line">cd proxychains-ng</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##修改最后一行，启用ssr的sock5代理</span></span></span><br><span class="line">socks5  127.0.0.1 1080</span><br></pre></td></tr></table></figure><h3 id="3-wp-cl"><a href="#3-wp-cl" class="headerlink" title="3. wp-cl"></a>3. wp-cl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar</span><br><span class="line">chmod +x wp-cli.phar </span><br><span class="line">sudo cp wp-cli.phar /usr/bin/wp</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##创建缓存文件夹，修改缓存文件夹权限</span></span></span><br><span class="line">sudo mkdir -p /home/www/.wp-cli/cache/</span><br><span class="line">sudo chown -R www:www /home/www</span><br><span class="line">sudo chmod -R 777 /home/www/.wp-cli/</span><br><span class="line">sudo su</span><br><span class="line">export WEBPATH=/www/wwwroot/liuqh.phy.sustech.edu.cn</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##检查需要更新的插件</span></span></span><br><span class="line">sudo -u www -- wp plugin list --path=$WEBPATH</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##依次更新插件</span></span></span><br><span class="line">for i in all-in-one-wp-migration all-in-one-seo-pack http-headers;do proxychains4 sudo -u www -- wp plugin update $i --path=$WEBPATH;done</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##更新主程序和数据库</span></span></span><br><span class="line">proxychains4 sudo -u www -- wp core update  --path=$WEBPATH</span><br><span class="line">proxychains4 sudo -u www -- wp core update-db  --path=$WEBPATH</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/11/26/hello-world/"/>
-      <url>/2019/11/26/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>运行成本</title>
-      <link href="/2015/02/06/%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC/"/>
-      <url>/2015/02/06/%E8%BF%90%E8%A1%8C%E6%88%90%E6%9C%AC/</url>
-      
-        <content type="html"><![CDATA[<p>传言云南对面在打仗，相比这边还是平静的，</p><p>那边的人，可能是想都不会想这边的人的一些想法吧  比如说有关买房 比如说磁性 比如说写东西</p><p>想起任何事物运行都是有成本的，所谓为了支撑正经事，要做些配套的工作</p><p>比如说每天的吃饭睡觉，平复自己波动的情绪，生物体内激素的作用，外界的温度阳光等等，都可以算是为了做成一点正经的工作而必须要付出的基础建设</p><p>如果考虑自己的或者别人的事情，不看到这些基础的需要，必然会偏差较大</p><p>这也算多少年来 我犯的傻吧</p><p>理解 理解 </p><h2 id="增强有效沟通效率"><a href="#增强有效沟通效率" class="headerlink" title="增强有效沟通效率"></a>增强有效沟通效率</h2><p>就像 有种说法 和人交流某种事情，要知道的比他知道的多，但讲给他听的要比他知道的少，才能有效沟通吧<br>不能做到 还是讲句 这个我不清楚 我不能给你乱讲，闭上自己浅薄的嘴巴 掐灭自己炫耀的念头吧<br> ###两种能力<br> 一种是接收信息的能力，感知了解掌握外界包括与之有交流的人表达的信息和情绪状况</p><p> 一种是控制能力，控制自己对外界的反应，并依照规律和法则及工具<br> 控制外界对自己的反馈 以及他人的情绪 及行为</p><p> 这两种能力必须修养</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>在这里写一些简单的文字</title>
-      <link href="/2015/02/05/%E5%9C%A8%E8%BF%99%E9%87%8C%E5%86%99%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E5%AD%97/"/>
-      <url>/2015/02/05/%E5%9C%A8%E8%BF%99%E9%87%8C%E5%86%99%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E5%AD%97/</url>
-      
-        <content type="html"><![CDATA[<p>所以  一直走下去 一直做本分的事情</p>]]></content>
       
       
       
