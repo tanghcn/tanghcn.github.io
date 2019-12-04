@@ -61,6 +61,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-声子" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/27/%E5%A3%B0%E5%AD%90/" class="article-date">
+  <time datetime="2019-11-26T16:06:27.865Z" itemprop="datePublished">2019-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/27/%E5%A3%B0%E5%AD%90/">声子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>晶格动力学<br>用经典理论力学方法讨论完整晶体中原子（离子）绕平衡位置的振动——晶格振动。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/11/27/%E5%A3%B0%E5%AD%90/" data-id="ck3reu7pn0006bwfu3m9pf5dm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-xelatex中文字体" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" class="article-date">
@@ -107,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://tangh.cn/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" data-id="ck3nytfv60004j6fudrizdmgf" class="article-share-link">Share</a>
+      <a data-url="https://tangh.cn/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" data-id="ck3reu7pj0004bwfuaw727a2u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,53 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://tangh.cn/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/" data-id="ck3nytfut0001j6fu3oytc6sj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-opsnsuse kernel" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/27/opsnsuse%20kernel/" class="article-date">
-  <time datetime="2019-11-26T16:06:27.849Z" itemprop="datePublished">2019-11-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/27/opsnsuse%20kernel/">solve [FAILED] Failed to start Load Kernel Modules</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装opensuse13-2-系统更新后，开机引导内核时候每次都出现"><a href="#安装opensuse13-2-系统更新后，开机引导内核时候每次都出现" class="headerlink" title="安装opensuse13.2 系统更新后，开机引导内核时候每次都出现"></a>安装opensuse13.2 系统更新后，开机引导内核时候每次都出现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ [FAILED] Failed to start Load Kernel Modules</span><br><span class="line">See <span class="string">"systemctl status systemd-modules-load.service"</span> <span class="keyword">for</span> details.</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-<p>虽然不影响使用，但是也看着不爽，今天终于没有拖延了，解决了这个问题，记录如下<br>第一步:查</p>
-<p>使用如上关键词依次在 baidu bing google 上查询了一遍<br>这个问题在baidu上只能找到贴吧上的一个帖子但是没有给出解决方案，大部分都是讲关于虚拟机的问题，<br>在bing上找到了一个有用的线索，但是还是没有看明白，但google 上给出了大量的中英文信息。<br>主要参考了 这个帖子<br><a href="https://bbs.archlinux.org/viewtopic.php?id=187529" target="_blank" rel="noopener">https://bbs.archlinux.org/viewtopic.php?id=187529</a><br>里面两个人对话 讲到分别在 /etc/modules-load.d/ 和 /usr/lib/modules-load.d 文件夹中查看有没有文件<br>并解决了问题，我就甩开膀子开干了<br>第二步：试</p>
-<p>我打开上述两个文件夹，第一个文件夹也是空的，但是在第二个文件夹里找到了两个文件。<br>将这两个文件 复制到主文件夹中新建的临时文件目录，以免删除错了来恢复<br>这两个文件分别是 bbswitch.conf sg.conf<br>里面文件内容如下 ：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bbswitch.conf</span><br><span class="line"></span><br><span class="line">bbswitch</span><br><span class="line"></span><br><span class="line">sg.conf</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load sg module at boot time</span></span><br><span class="line">sg</span><br></pre></td></tr></table></figure>
-<p>然后 我就用sudo rm s* b* 删除了这两个文件了<br>接下来 参考了另一篇博文<br>chen.junchang.blog.163.com/blog/static/6344519201503135322287/<br>使用了 <code>sudo mkinitrd</code> 重新生成启动映像<br>生成过程中产生了一堆堆引导modules的错误，不知道是不是没有插入软件源U盘的原因。<br>然后重启<br>第三步：查</p>
-<p>重启后心惊胆跳地等待，没有报错，谢天谢地，<br>我等学渣基础不牢固，做事情总是自己对自己都不放心的</p>
-<p>最后，记录此文以给自己和读者参考</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tangh.cn/2019/11/27/opsnsuse%20kernel/" data-id="ck3nytfuc0000j6fu08i14bz6" class="article-share-link">Share</a>
+      <a data-url="https://tangh.cn/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/" data-id="ck3reu7pe0002bwfu58xgc1tq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +198,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -239,6 +230,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/04/pve%E4%B8%AD%E5%AF%BC%E5%85%A5ova%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6/">pve中导入ova虚拟机文件</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/02/%E9%80%9A%E8%BF%87socks5%E4%BB%A3%E7%90%86%E6%9B%B4%E6%96%B0wordpress/">通过socks5代理更新wordpress</a>
           </li>
         
@@ -252,10 +247,6 @@
         
           <li>
             <a href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">xelatex中文字体</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/27/remmina%E6%97%A0%E6%B3%95%E9%80%9A%E8%BF%87%E5%9F%9F%E5%90%8D%E7%99%BB%E9%99%86/">remmina无法通过域名登陆</a>
           </li>
         
       </ul>
