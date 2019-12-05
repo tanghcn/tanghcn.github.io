@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>pve中导入ova虚拟机文件 | one line</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="支持aiida计算的quantum_mobile虚拟机发布了新版本19.09.为此我下载了新版虚拟机文件并导入到Proxmox VE 虚拟机服务器中。 ###　１．下载 quantum_mobile虚拟机　 qm 官网：https:&#x2F;&#x2F;materialscloud.org&#x2F;work&#x2F;quantum-mobile 下载发布页面： https:&#x2F;&#x2F;github.com&#x2F;marvel-nccr&#x2F;quan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pve中导入ova虚拟机文件">
+<meta property="og:url" content="https:&#x2F;&#x2F;tangh.cn&#x2F;2019&#x2F;12&#x2F;05&#x2F;pve%E4%B8%AD%E5%AF%BC%E5%85%A5ova%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6&#x2F;index.html">
+<meta property="og:site_name" content="one line">
+<meta property="og:description" content="支持aiida计算的quantum_mobile虚拟机发布了新版本19.09.为此我下载了新版虚拟机文件并导入到Proxmox VE 虚拟机服务器中。 ###　１．下载 quantum_mobile虚拟机　 qm 官网：https:&#x2F;&#x2F;materialscloud.org&#x2F;work&#x2F;quantum-mobile 下载发布页面： https:&#x2F;&#x2F;github.com&#x2F;marvel-nccr&#x2F;quan">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-05T06:35:19.615Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="one line" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">one line</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tangh.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-pve中导入ova虚拟机文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/pve%E4%B8%AD%E5%AF%BC%E5%85%A5ova%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2019-12-05T06:35:19.615Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      pve中导入ova虚拟机文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>支持aiida计算的quantum_mobile虚拟机发布了新版本19.09.为此我下载了新版虚拟机文件并导入到Proxmox VE 虚拟机服务器中。</p>
+<p>###　１．下载 quantum_mobile虚拟机　</p>
+<p>qm 官网：<a href="https://materialscloud.org/work/quantum-mobile" target="_blank" rel="noopener">https://materialscloud.org/work/quantum-mobile</a></p>
+<p>下载发布页面： <a href="https://github.com/marvel-nccr/quantum-mobile/releases/" target="_blank" rel="noopener">https://github.com/marvel-nccr/quantum-mobile/releases/</a></p>
+<p>提供的下载链接短地址<a href="http://bit.ly/2ZMG4Uo需要通过代理上网解析" target="_blank" rel="noopener">http://bit.ly/2ZMG4Uo需要通过代理上网解析</a> 。</p>
+<p>解析出的地址后在服务器上下载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup wget https://object.cscs.ch/v1/AUTH_b1d80408b3d340db9f03d373bbde5c1e/marvel-vms/quantum_mobile_19.09.0.ova &amp;</span><br></pre></td></tr></table></figure>
+
+<p>将下载好的文件添加iso后缀通过网页上传到pve服务器的镜像软件文件夹。<br>或者直接scp复制到pve服务器。</p>
+<h3 id="2-解压ova文件"><a href="#2-解压ova文件" class="headerlink" title="2. 解压ova文件"></a>2. 解压ova文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /var/lib/vz/template/iso/</span><br><span class="line">tar xvf quantum_mobile_19.09.0.ova.ISO</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 将解压出来的虚拟机文件和磁盘文件通过qm命令导入到pve服务器local-lvm存储池中</span></span></span><br><span class="line">qm importovf 116 quantum_mobile_19.09.0.ovf local-lvm --format qcow2</span><br><span class="line">qm importdisk 116 quantum_mobile_19.09.0-disk001.vmdk local-lvm -format qcow2</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-在网页上确认编号为116的虚拟机硬件配置里已经关联到导入的vm-116-disk-0虚拟磁盘"><a href="#3-在网页上确认编号为116的虚拟机硬件配置里已经关联到导入的vm-116-disk-0虚拟磁盘" class="headerlink" title="3. 在网页上确认编号为116的虚拟机硬件配置里已经关联到导入的vm-116-disk-0虚拟磁盘"></a>3. 在网页上确认编号为116的虚拟机硬件配置里已经关联到导入的vm-116-disk-0虚拟磁盘</h3><h3 id="4-启动虚拟机，检查报错，确认导入成功"><a href="#4-启动虚拟机，检查报错，确认导入成功" class="headerlink" title="4. 启动虚拟机，检查报错，确认导入成功"></a>4. 启动虚拟机，检查报错，确认导入成功</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tangh.cn/2019/12/05/pve%E4%B8%AD%E5%AF%BC%E5%85%A5ova%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6/" data-id="ck3schgnt0002c7fu6h7lcv75" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/02/%E9%80%9A%E8%BF%87socks5%E4%BB%A3%E7%90%86%E6%9B%B4%E6%96%B0wordpress/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">通过socks5代理更新wordpress</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/05/pve%E4%B8%AD%E5%AF%BC%E5%85%A5ova%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%96%87%E4%BB%B6/">pve中导入ova虚拟机文件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/02/%E9%80%9A%E8%BF%87socks5%E4%BB%A3%E7%90%86%E6%9B%B4%E6%96%B0wordpress/">通过socks5代理更新wordpress</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/matlab2012a%20on%20opensuse%2013.2%20/">matlab2012a on opensuse 13.2 </a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/%E5%A3%B0%E5%AD%90/">声子</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/27/xelatex%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">xelatex中文字体</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Tang Hong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
